@@ -1,0 +1,13 @@
+<h1>Este es un Articulo</h1>
+<p>Aquí debes construir el articulo</p>
+
+<%= form_tag("/articles",remote: true) do %> 
+  <%= label_tag('article_name', "Título del Articulo") %> 
+  <%= text_field_tag('article_name') %>   <br>
+  <%= label_tag('article_content', "Contenido") %> 
+  <%= text_area_tag('article_content') %>   <br>
+  <%= submit_tag("crear") %> 
+<% end %>
+<br>
+
+<%= link_to 'Articles',articles_path %>

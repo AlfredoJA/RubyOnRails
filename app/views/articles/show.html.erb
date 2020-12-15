@@ -1,0 +1,6 @@
+<h1><%= @article.name%></h1>
+<p><%= @article.created_at.strftime("%d-%m-%y")%></p>
+<p><%= @article.content%></p>
+<%= link_to 'Edit',edit_article_path(@article) %>
+<%= link_to 'Articles',articles_path %>
+<%= link_to "Eliminar", @article, :method => :delete, data: {confirm: "¿Seguro que quieres ELiminar el artículo?"} %> 
