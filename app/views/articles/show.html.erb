@@ -4,3 +4,72 @@
 <%= link_to 'Edit',edit_article_path(@article) %>
 <%= link_to 'Articles',articles_path %>
 <%= link_to "Eliminar", @article, :method => :delete, data: {confirm: "¿Seguro que quieres ELiminar el artículo?"} %> 
+
+<h2>Comments</h2>
+<!--<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+  <p><%=comment.created_at.strftime("%d-%m-%y")%></p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>-->
+<div class="message"></div>
+
+<!--<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %> -->
+
+  <%= label_tag(:commenter, "Título del Articulo") %> 
+  <%= text_field_tag(:commenter) %>   <br>
+  <%= label_tag(:body, "Contenido") %> 
+  <%= text_area_tag(:body) %>   <br>
+  <%= submit_tag(:create, id:"submit_create") %> 
+
+<script>
+	$("input#submit_create").mousedown(function(){
+		$.ajax({
+	  	method: "post",  // esto es un metodo para envíar el formulario
+	  	url: "/comment", // esta es la ruta a la que se envía el formulario, dentro de el frontend
+	  	data: { commenter: $("input#commenter").val() , body: $("textarea#body").val() , article_id: "<%= @article.id %>"} //esta es la creación del objeto json parameter y location son asignaciones de llaves o nombres de rutas dentro del mismo y lo que les sigue es el valor que almacenan
+		}).done(function(message) {
+		console.log(message.message)
+  		})//done se encarga de recibir el dato que enviaron en el controlador con format.jason... 
+  		$("input#commenter").val("");
+  		$("textarea#body").val("");
+	});
+	$("input#submit_create").mouseup(function(){
+		$('div.message').html(
+			'<% comentarios = @article.comments.all%> '+
+			'<% comentarios.each do |comment|%>'+
+				'<p> Commenter: <%= comment.commenter%> </p><br>'+
+				'<p> Comment: <%= comment.body%> </p><br>'+
+			'<% end %>'
+		); 
+	});
+</script> 
+
+<!--	'<% @article.comments.each do |comment| %>'+
+			  '<p>'+
+			    '<strong>Commenter:</strong>'+
+			    '<%= comment.commenter %>'+
+			  '</p>'+
+			  
+			  '<p>'+
+			    '<strong>Comment:</strong>'+
+			    '<%= comment.body %>'+
+			 ' </p>'+
+			'<% end %>'   -->
