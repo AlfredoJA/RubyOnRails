@@ -12,6 +12,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+  	@article = Article.find(params[:article_id])
+  	@comentarios = @article.comments.all
+  end
+
+
   #private
    # def comment_params
     #  params.require(:comment).permit(:commenter, :body)

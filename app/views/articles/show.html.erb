@@ -53,10 +53,11 @@
 	});
 	$("input#submit_create").mouseup(function(){
 		$('div.message').html(
-			'<% comentarios = @article.comments.all%> '+
-			'<% comentarios.each do |comment|%>'+
-				'<p> Commenter: <%= comment.commenter%> </p><br>'+
-				'<p> Comment: <%= comment.body%> </p><br>'+
+      '<p>ultimo<%= @article.comments.all.last.commenter %></p>'+
+			'<% comentarios = @article.comments.all %>'+
+			'<% comentarios.each do |comment| %>'+
+				'<p> Commenter: <%= comment.commenter %></p>'+
+				'<p> Comment: <%= comment.body %> </p>'+
 			'<% end %>'
 		); 
 	});
