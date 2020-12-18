@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   post 'articles' , action: :create , controller: 'articles'
   post 'comment' , action: :create , controller: 'comments'
+  post 'comment/show' , action: :show , controller: 'comments'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

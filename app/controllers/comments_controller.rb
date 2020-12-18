@@ -13,8 +13,8 @@ class CommentsController < ApplicationController
   end
 
   def show
-  	@article = Article.find(params[:article_id])
   	@comentarios = @article.comments.all
+
   end
 
 
